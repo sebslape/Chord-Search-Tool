@@ -1,4 +1,4 @@
-
+from chord import Chord
 
 all_notes = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"]
 
@@ -66,59 +66,62 @@ def search_for_chord(bass_note, top_note, tonic, scale_name):
     # Diatonic Chords
     for chord_structure_name in scale_chord_structures:
         chord_structure = scale_chord_structures[chord_structure_name]
-        for note in scale_notes:
+        for scale_degree, note in enumerate(scale_notes, start=1):
             chord = build_chord(chord_structure, note, scale_notes)
 
             chord_bass_note = chord[0]
             chord_top_note = chord[-1]
 
-            print(f"Current chord: {chord}")
+            #print(f"Current chord: {chord}")
 
             if (chord_bass_note == bass_note and (top_note == None or chord_top_note == top_note)):
-                diatonic_chords.append(chord)
+                diatonic_chords.append(Chord(chord_bass_note, scale_degree, chord_structure_name, 0, 0))
 
             # Get inversions too if the chord has four or less notes
             if (len(chord_structure) <= 4):
                 for inversion in range(1,len(chord)):
                     inverted_chord = chord[inversion:] + chord[:inversion]
-                    print(f"Current chord: {inverted_chord} inversion {inversion}")
+                    #print(f"Current chord: {inverted_chord} inversion {inversion}")
 
                     chord_bass_note = inverted_chord[0]
                     chord_top_note = inverted_chord[-1]
 
                     if (chord_bass_note == bass_note and (top_note == None or chord_top_note == top_note)):
-                        diatonic_chords.append(inverted_chord)
+                        diatonic_chords.append(Chord(chord_bass_note, scale_degree, chord_structure_name, inversion, 0))
     
     # Applied Chords
     for chord_structure_name in scale_chord_structures:
         chord_structure = scale_chord_structures[chord_structure_name]
-        for note in scale_notes:
+        for scale_degree, note in enumerate(scale_notes, start=1):
             # Get the major scale where the note is the tonic
             applied_scale_notes = get_notes_of_scale(note, "major")
 
             # Get the IV of, V of, and vii of chords
-            for applied_note in (applied_scale_notes[i] for i in [3, 4, 6]):
+            for applied_scale_degree, applied_note in enumerate(applied_scale_notes, start=1):
+                if (applied_scale_degree not in [4,5,7]):
+                    continue
+                
                 chord = build_chord(chord_structure, applied_note, applied_scale_notes)
 
                 chord_bass_note = chord[0]
                 chord_top_note = chord[-1]
 
-                print(f"Current chord: {chord}")
+                #print(f"Current chord: {chord}")
 
                 if (chord_bass_note == bass_note and (top_note == None or chord_top_note == top_note)):
-                    applied_chords.append(chord)
+                    applied_chords.append(Chord(chord_bass_note, scale_degree, chord_structure_name, 0, applied_scale_degree))
 
                 # Get inversions too if the chord has four or less notes
                 if (len(chord_structure) <= 4):
                     for inversion in range(1,len(chord)):
                         inverted_chord = chord[inversion:] + chord[:inversion]
-                        print(f"Current chord: {inverted_chord} inversion {inversion}")
+                        #print(f"Current chord: {inverted_chord} inversion {inversion}")
 
                         chord_bass_note = inverted_chord[0]
                         chord_top_note = inverted_chord[-1]
 
                         if (chord_bass_note == bass_note and (top_note == None or chord_top_note == top_note)):
-                            applied_chords.append(inverted_chord)
+                            applied_chords.append(Chord(chord_bass_note, scale_degree, chord_structure_name, inversion, applied_scale_degree))
     
     print("----Diatonic Chords----")
     print(diatonic_chords if diatonic_chords else "None")
@@ -126,4 +129,4 @@ def search_for_chord(bass_note, top_note, tonic, scale_name):
     print("----Applied Chords----")
     print(applied_chords if applied_chords else "None")
 
-    return diatonic_chords
+    return diatonic_chords + applied_chords
