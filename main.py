@@ -34,6 +34,7 @@ def main():
         # You must choose at least a bottom, top, or a note the chord must contain
         if (args.bottom or args.top or args.notes):
             search_scale_chords(args.bottom, args.top, args.notes, args.tonic, args.scale, args.applied)
+        else:
             print("You need to specify at a bottom, top, or a note in a scale mode search.")
     else:
         # You must choose at least 3 notes the chord must contain

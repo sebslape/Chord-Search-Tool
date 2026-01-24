@@ -1,3 +1,5 @@
+from theory import CHORD_STRUCTURE_BASE_QUALITY, CHORD_STRUCTURE_EXTENSION_NOTATION, INVERSION_BASS_QUALITY, APPLIED_CHORD_QUALITY
+
 ROMAN_NUMERALS = {
     1: "I",
     2: "II",
@@ -6,40 +8,6 @@ ROMAN_NUMERALS = {
     5: "V",
     6: "VI",
     7: "VII",
-}
-
-CHORD_STRUCTURE_BASE_QUALITY = {
-    "triad": "5",
-    "sus2": "5",
-    "sus4": "5",
-    "7th": "7",
-    "7th sus2": "7",
-    "7th sus4": "7",
-    "9th": "9"
-}
-
-CHORD_STRUCTURE_EXTENSION_NOTATION = {
-    "triad": "",
-    "sus2": "sus2",
-    "sus4": "sus4",
-    "7th": "",
-    "7th sus2": "sus2",
-    "7th sus4": "sus2",
-    "9th": ""
-}
-
-INVERSION_BASS_QUALITY = {
-    ("5", "1"): "⁶",
-    ("5", "2"): "⁶₄",
-    ("7", "1"): "⁶₅",
-    ("7", "2"): "⁴₃",
-    ("7", "3"): "⁴₂"
-}
-
-APPLIED_CHORD_QUALITY = {
-    "IV": "IV",
-    "V": "V",
-    "VII": "vii°"
 }
 
 class Chord:

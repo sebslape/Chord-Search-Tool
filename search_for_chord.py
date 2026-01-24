@@ -1,42 +1,5 @@
 from chord import Chord
-
-ALL_NOTES = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"]
-
-SCALES = {
-    "major": [0, 2, 4, 5, 7, 9, 11],
-    "minor": [0, 2, 3, 5, 7, 8, 10],
-    "dorian": [0, 2, 3, 5, 7, 9, 10],
-    "phrygian": [0, 1, 3, 5, 7, 8, 10],
-    "lydian": [0, 2, 4, 6, 7, 9, 11],
-    "mixolydian": [0, 2, 4, 5, 7, 9, 10],
-    "locrian": [0, 1, 3, 5, 6, 8, 10]
-}
-
-# Chords built using the scale notes
-CHORD_STRUCTURES = {
-    "triad": [0, 2, 4],
-    "sus2": [0, 1, 4],
-    "sus4": [0, 3, 4],
-    "7th": [0, 2, 4, 6],
-    "7th sus2": [0, 1, 4, 6],
-    "7th sus4": [0, 3, 4, 6],
-    "9th": [0, 2, 4, 6, 8],
-}
-
-CHROMATIC_CHORD_STRUCTURES = {
-    "major": [0, 4, 7],
-    "minor": [0, 3, 7],
-    "diminished": [0, 3, 6],
-    "augmented": [0, 4, 8],
-    "sus2": [0, 2, 7],
-    "sus4": [0, 5, 7],
-    "major 7th": [0, 4, 7, 11],
-    "minor 7th": [0, 3, 7, 10],
-    "dominant 7th": [0, 4, 7, 10],
-    "major 9th": [0, 4, 7, 11, 14],
-    "minor 9th": [0, 3, 7, 10, 14],
-    "dominant 9th": [0, 4, 7, 10, 14],
-}
+from theory import ALL_NOTES, SCALES, CHORD_STRUCTURES, CHROMATIC_CHORD_STRUCTURES
 
 def build_scale_chord(chord_structure, bass_note, scale_notes):
     note_index = scale_notes.index(bass_note)
