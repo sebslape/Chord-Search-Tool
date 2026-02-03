@@ -36,6 +36,21 @@ CHROMATIC_CHORD_STRUCTURES = {
     "dominant 9th": [0, 4, 7, 10, 14],
 }
 
+CHROMATIC_CHORD_STRUCTURES_NAMES = {
+    (0, 4, 7): "major",
+    (0, 3, 7): "minor",
+    (0, 3, 6): "diminished",
+    (0, 4, 8): "augmented",
+    (0, 2, 7): "sus2",
+    (0, 5, 7): "sus4",
+    (0, 4, 7, 11): "major 7th",
+    (0, 3, 7, 10): "minor 7th",
+    (0, 4, 7, 10): "dominant 7th",
+    (0, 4, 7, 11, 14): "major 9th",
+    (0, 3, 7, 10, 14): "minor 9th",
+    (0, 4, 7, 10, 14): "dominant 9th",
+}
+
 CHORD_STRUCTURE_BASE_QUALITY = {
     "triad": "5",
     "sus2": "5",
@@ -68,4 +83,14 @@ APPLIED_CHORD_QUALITY = {
     "IV": "IV",
     "V": "V",
     "VII": "vii°"
+}
+
+ROMAN_NUMERALS = {
+    1: "I",
+    2: "II",
+    3: "III",
+    4: "IV",
+    5: "V",
+    6: "VI",
+    7: "VII",
 }

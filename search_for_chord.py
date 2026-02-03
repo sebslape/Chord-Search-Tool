@@ -1,4 +1,4 @@
-from chord import Chord
+from chord import ScaleChord, ChromaticChord
 from theory import ALL_NOTES, SCALES, CHORD_STRUCTURES, CHROMATIC_CHORD_STRUCTURES
 
 def build_scale_chord(chord_structure, bass_note, scale_notes):
@@ -44,7 +44,7 @@ def get_matching_scale_chords(chord_notes, chord_structure_name, scale_degree, a
         if ((bass_note == None or chord_bass_note == bass_note) and
             (top_note == None or chord_top_note == top_note) and
             (notes == None or all(note in chord_notes for note in notes))):
-            matches.append(Chord(chord_bass_note, scale_degree, chord_structure_name, inversion, applied_degree))
+            matches.append(ScaleChord(chord_notes[0], scale_degree, chord_structure_name, inversion, applied_degree, inverted_chord))
     
     return matches
 
@@ -61,7 +61,7 @@ def get_matching_chromatic_chords(chord_notes, chord_structure_name, notes, bass
         if ((bass_note == None or chord_bass_note == bass_note) and
             (top_note == None or chord_top_note == top_note) and
             (notes == None or all(note in chord_notes for note in notes))):
-            matches.append((f"{chord_bass_note} {chord_structure_name} inversion {inversion}", inverted_chord))
+            matches.append(ChromaticChord(chord_notes[0], chord_structure_name, inversion, inverted_chord))
     
     return matches
 
@@ -76,9 +76,13 @@ def search_chromatic_chords(bass_note, top_note, notes):
             )
     
     print("----Chords----")
-    print(chords if chords else "None")
+    if (chords == None):
+        print("None")
+    else:
+        for chord in chords:
+            print(chord)
 
-def search_scale_chords(bass_note, top_note, notes, tonic, scale_name, applied):
+def search_scale_chords(bass_note, top_note, notes, tonic, scale_name, applied, roman):
     diatonic_chords = []
     applied_chords = []
     scale_notes = get_notes_of_scale(tonic, scale_name)
@@ -110,10 +114,21 @@ def search_scale_chords(bass_note, top_note, notes, tonic, scale_name, applied):
                 )
     
     print("----Diatonic Chords----")
-    print(diatonic_chords if diatonic_chords else "None")
+    if (diatonic_chords == None):
+        print("None")
+    else:
+        for chord in diatonic_chords:
+            if (roman == True):
+                print(chord.display_roman_numerals())
+            else:
+                print(chord)
 
     if applied:
         print("----Applied Chords----")
-        print(applied_chords if applied_chords else "None")
+        if (applied_chords == None):
+            print("None")
+        else:
+            for chord in applied_chords:
+                print(chord)
 
     return diatonic_chords + applied_chords
